@@ -1,7 +1,7 @@
 package com.example.sandbox_vnpay.order.service;
 
 import com.example.sandbox_vnpay.order.model.Order;
-import com.example.sandbox_vnpay.order.Utils.Status;
+import com.example.sandbox_vnpay.order.util.Status;
 import com.example.sandbox_vnpay.order.repository.OrderRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

@@ -1,7 +1,7 @@
 package com.example.sandbox_vnpay.order.controller;
 
 import com.example.sandbox_vnpay.order.model.Order;
-import com.example.sandbox_vnpay.order.Utils.Status;
+import com.example.sandbox_vnpay.order.util.Status;
 import com.example.sandbox_vnpay.order.service.OrderService;
 import org.springframework.web.bind.annotation.*;
 
