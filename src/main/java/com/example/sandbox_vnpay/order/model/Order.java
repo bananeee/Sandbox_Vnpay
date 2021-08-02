@@ -1,5 +1,7 @@
 package com.example.sandbox_vnpay.order.model;
 
+import com.example.sandbox_vnpay.order.Utils.Status;
+
 import javax.persistence.*;
 import java.time.LocalDate;
 
