@@ -5,11 +5,17 @@ import com.example.sandbox_vnpay.order.util.Status;
 import com.example.sandbox_vnpay.order.repository.OrderRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityNotFoundException;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.ZonedDateTime;
 import java.util.List;
 import java.util.Optional;
 
@@ -26,6 +32,12 @@ public class OrderService {
 
     public List<Order> getOrders() {
         return orderRepository.findAll();
+    }
+
+    public Page<Order> getOrdersPagination(Integer pageNo, Integer pageSize) {
+        Pageable pageable = PageRequest.of(pageNo, pageSize, Sort.by("id").descending());
+
+        return orderRepository.findAll(pageable);
     }
 
     public Order getOrderById(Long orderId) {
@@ -49,11 +61,11 @@ public class OrderService {
     }
 
     public void createOrder(Order newOrder, String ipAddr) {
-        log.info("User IP: " + ipAddr);
+//        log.info("User IP: " + ipAddr);
 //        Optional<Order> order = orderRepository.findById(newOrder.getId());
 //        if (order.isPresent())
 //            throw new EntityExistsException();
-        LocalDate orderDate = LocalDate.now();
+        LocalDateTime orderDate = LocalDateTime.now();
         newOrder.setIpAddress(ipAddr);
         newOrder.setOrderDate(orderDate);
         orderRepository.save(newOrder);
@@ -67,4 +79,5 @@ public class OrderService {
         log.info("Delete order " + order.toString());
         orderRepository.delete(order.get());
     }
+
 }

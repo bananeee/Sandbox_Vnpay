@@ -1,0 +1,24 @@
+* {
+    border: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.container {
+    margin: auto;
+}
+
+nav {
+    margin: 1rem 0;
+    padding: 0 1rem;
+}
+
+.form-element {
+    margin: 1rem 0;
+}
+
+@media (min-width: 1200px) {
+    .container {
+        max-width: 1140px;
+    }
+}

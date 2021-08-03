@@ -31,7 +31,7 @@ public class OrderController {
     @PatchMapping(path = "{orderId}/{status}")
     public void updateOrderStatus(@PathVariable Long orderId,
                                   @PathVariable String status) {
-        Boolean statusExist = false;
+        boolean statusExist = false;
         for (Status s : Status.values()) {
             System.out.println(s.name());
             if (s.name().equalsIgnoreCase(status)) {

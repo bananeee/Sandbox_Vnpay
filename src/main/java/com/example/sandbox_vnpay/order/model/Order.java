@@ -3,7 +3,9 @@ package com.example.sandbox_vnpay.order.model;
 import com.example.sandbox_vnpay.order.util.Status;
 
 import javax.persistence.*;
-import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 @Entity(name = "orders")
 @Table(name = "orders")
@@ -40,7 +42,7 @@ public class Order {
             name = "order_date",
             nullable = false
     )
-    private LocalDate orderDate;
+    private LocalDateTime orderDate;
 
     @Column(
             name = "order_status_code",
@@ -71,7 +73,7 @@ public class Order {
     public Order(Long id,
                  Long amount,
                  String description,
-                 LocalDate orderDate,
+                 LocalDateTime orderDate,
                  Status  statusCode,
                  String ipAddress) {
         this.id = id;
@@ -106,11 +108,12 @@ public class Order {
         this.description = description;
     }
 
-    public LocalDate getOrderDate() {
-        return orderDate;
+    public String getOrderDate() {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss");
+        return orderDate.format(formatter);
     }
 
-    public void setOrderDate(LocalDate orderDate) {
+    public void setOrderDate(LocalDateTime orderDate) {
         this.orderDate = orderDate;
     }
 
