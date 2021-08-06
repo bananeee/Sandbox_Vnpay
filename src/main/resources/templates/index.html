@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Danh sách đơn hàng</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link th:href="@{/css/index.css}" rel="stylesheet"/>
+</head>
+<body>
+<div class="container">
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <a class="navbar-brand" href="/home/">VNPAY DEMO</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportContent">
+            <ul class="navbar-nav">
+                <li class="nav-item"><a class="nav-link" href="/home">Danh sách</a></li>
+            </ul>
+            <ul class="navbar-nav">
+                <li class="nav-item"><a class="nav-link" href="/create">Tạo mới</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <h3>Danh sách đơn hàng</h3>
+
+    <ul class="pagination">
+        <li class="page-item">
+            <a class="page-link" th:href="'/home?page=' + ${currentPage - 1}"
+               aria-label="Previous" th:classappend="${currentPage} <= 0 ? 'disabled'">
+                <span aria-hidden="true">&laquo;</span>
+            </a>
+        </li>
+        <div th:each="i : ${#numbers.sequence( 0, totalPage - 1)}" th:if="${totalPage != 0}">
+            <li class="page-item"><a class="page-link" th:href="'/home?page=' + ${i}" th:text="${i}"></a></li>
+        </div>
+        <li class="page-item">
+            <a class="page-link" th:href="'/home?page=' + ${currentPage + 1}"
+               aria-label="Next" th:classappend="${currentPage} >= ${totalPage} - 1 ? 'disabled'">
+                <span aria-hidden="true">&raquo;</span>
+            </a>
+        </li>
+    </ul>
+
+    <table class="table table-bordered table-hover">
+        <thead>
+        <tr>
+            <th>Mã</th>
+            <th>Số tiền</th>
+            <th>Nội dung</th>
+            <th>Ngày tạo</th>
+            <th>Tình trạng</th>
+            <th>IpAddr</th>
+            <th></th>
+        </tr>
+        </thead>
+
+        <tbody>
+        <tr th:each="order: ${orders}">
+            <td th:text="${order.getId()}"></td>
+            <td th:text="${order.getAmount()}"></td>
+            <td th:text="${order.getDescription()}"></td>
+            <td class="center" th:text="${order.getOrderDate()}">20-4-2021</td>
+            <td class="center" th:switch="${order.getOrderStatus()}">
+                <span class="pending" th:case="'PENDING'">Chưa thanh toán</span>
+                <span class="suscess" th:case="'SUSCESS'">Đã thanh toán</span>
+                <span class="unsuscess" th:case="'UNSUSCESS'">GD lỗi</span>
+            </td>
+            <td th:text="${order.getIpAddress()}"></td>
+            <td><a th:href="'order/' + ${order.getId()}">Chi tiết</a></td>
+        </tr>
+        </tbody>
+    </table>
+
+    <ul class="pagination">
+        <li class="page-item">
+            <a class="page-link" th:href="'/home?page=' + ${currentPage - 1}"
+               aria-label="Previous" th:classappend="${currentPage} <= 0 ? 'disabled'">
+                <span aria-hidden="true">&laquo;</span>
+            </a>
+        </li>
+        <div th:each="i : ${#numbers.sequence( 0, totalPage - 1)}" th:if="${totalPage != 0}">
+            <li class="page-item"><a class="page-link" th:href="'/home?page=' + ${i}" th:text="${i}"></a></li>
+        </div>
+        <li class="page-item">
+            <a class="page-link" th:href="'/home?page=' + ${currentPage + 1}"
+               aria-label="Next" th:classappend="${currentPage} >= ${totalPage} - 1 ? 'disabled'">
+                <span aria-hidden="true">&raquo;</span>
+            </a>
+        </li>
+    </ul>
+</div>
+
+
+<!--<nav class="navbar navbar-expand-lg navbar-light bg-light">-->
+<!--    <div class="container-fluid">-->
+<!--        <a class="navbar-brand" href="#">Navbar</a>-->
+<!--        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">-->
+<!--            <span class="navbar-toggler-icon"></span>-->
+<!--        </button>-->
+<!--        <div class="collapse navbar-collapse" id="navbarSupportedContent">-->
+<!--            <ul class="navbar-nav me-auto mb-2 mb-lg-0">-->
+<!--                <li class="nav-item">-->
+<!--                    <a class="nav-link active" aria-current="page" href="#">Home</a>-->
+<!--                </li>-->
+<!--                <li class="nav-item">-->
+<!--                    <a class="nav-link" href="#">Link</a>-->
+<!--                </li>-->
+<!--                <li class="nav-item dropdown">-->
+<!--                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">-->
+<!--                        Dropdown-->
+<!--                    </a>-->
+<!--                    <ul class="dropdown-menu" aria-labelledby="navbarDropdown">-->
+<!--                        <li><a class="dropdown-item" href="#">Action</a></li>-->
+<!--                        <li><a class="dropdown-item" href="#">Another action</a></li>-->
+<!--                        <li><hr class="dropdown-divider"></li>-->
+<!--                        <li><a class="dropdown-item" href="#">Something else here</a></li>-->
+<!--                    </ul>-->
+<!--                </li>-->
+<!--                <li class="nav-item">-->
+<!--                    <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>-->
+<!--                </li>-->
+<!--            </ul>-->
+<!--            <form class="d-flex">-->
+<!--                <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">-->
+<!--                <button class="btn btn-outline-success" type="submit">Search</button>-->
+<!--            </form>-->
+<!--        </div>-->
+<!--    </div>-->
+<!--</nav>-->
+</body>
+</html>
