@@ -28,13 +28,13 @@
     <h3>Tạo mới đơn hàng</h3>
 
 <!--    <form action="#" th:action="@{/create}" th:object="${order}" method="post">-->
-    <form action="#" th:action="@{/create}" method="post">
+    <form action="#" th:action="@{/create}"  method="post">
         <div class="form-element">
-            <label for="category" class="form-label">Loại hàng hóa</label>
-            <select name="category" class="form-control" id="category">
-                <option value="charge_phone_card">Nạp tiền điện thoại</option>
-                <option value="pay_bill">Thanh toán hóa đơn</option>
-                <option value="pay_for_fashion">Thời trang</option>
+            <label for="ordertype" class="form-label">Loại hàng hóa</label>
+            <select name="ordertype" class="form-control" id="ordertype">
+                <option value="topup">Nạp tiền điện thoại</option>
+                <option value="billpayment">Thanh toán hóa đơn</option>
+                <option value="fashion">Thời trang</option>
             </select>
         </div>
         <div class="form-element">
@@ -50,8 +50,8 @@
                       th:text="'Thanh toan don hang thoi gian: ' + ${currentTime}"></textarea>
         </div>
         <div class="form-element">
-            <label for="bank" class="form-label">Ngân hàng</label>
-            <select name="bank" class="form-control" id="bank">
+            <label for="bankcode" class="form-label">Ngân hàng</label>
+            <select name="bankcode" class="form-control" id="bankcode">
                 <option value="">Không chọn</option>
                 <option value="VNPAYQR">VNPAYQR</option>
                 <option value="VNBANK">LOCAL BANK</option>

@@ -64,10 +64,10 @@
             <td th:text="${order.getAmount()}"></td>
             <td th:text="${order.getDescription()}"></td>
             <td class="center" th:text="${order.getOrderDate()}">20-4-2021</td>
-            <td class="center" th:switch="${order.getOrderStatus()}">
+            <td class="center" th:switch="${order.getOrderStatus().name()}">
                 <span class="pending" th:case="'PENDING'">Chưa thanh toán</span>
-                <span class="suscess" th:case="'SUSCESS'">Đã thanh toán</span>
-                <span class="unsuscess" th:case="'UNSUSCESS'">GD lỗi</span>
+                <span class="success" th:case="'SUCCESS'">Đã thanh toán</span>
+                <span class="unsuccess" th:case="'UNSUCCESS'">GD lỗi</span>
             </td>
             <td th:text="${order.getIpAddress()}"></td>
             <td><a th:href="'order/' + ${order.getId()}">Chi tiết</a></td>

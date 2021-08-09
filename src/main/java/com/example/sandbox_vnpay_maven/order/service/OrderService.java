@@ -42,7 +42,7 @@ public class OrderService {
         log.info("Get order " + orderId);
         Optional<Order> order = orderRepository.findById(orderId);
         if (order.isEmpty())
-            throw new EntityNotFoundException("Order " + orderId + " not found");
+            return null;
 
         return order.get();
     }
@@ -58,7 +58,7 @@ public class OrderService {
 
     }
 
-    public void createOrder(Order newOrder, String ipAddr) {
+    public Long createOrder(Order newOrder, String ipAddr) {
 //        log.info("User IP: " + ipAddr);
 //        Optional<Order> order = orderRepository.findById(newOrder.getId());
 //        if (order.isPresent())
@@ -66,7 +66,8 @@ public class OrderService {
         LocalDateTime orderDate = LocalDateTime.now();
         newOrder.setIpAddress(ipAddr);
         newOrder.setOrderDate(orderDate);
-        orderRepository.save(newOrder);
+        Order createdOrder = orderRepository.save(newOrder);
+        return createdOrder.getId();
     }
 
     public void deleteOrder(Long orderId) {

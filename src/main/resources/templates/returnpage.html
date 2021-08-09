@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Giao dịch được thực hiện hoàn tất</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link th:href="@{/css/returnpage.css}" rel="stylesheet"/>
+</head>
+<body>
+<div class="container">
+    <div class="result" th:switch="${vnp_ResponseCode}">
+        <p th:case="'00'">Giao dịch thành công.</p>
+        <p th:case="'01'">Giao dịch đã tồn tại.</p>
+        <p th:case="'02'">Merchant không hợp lệ (kiểm tra lại vnp_TmnCode).</p>
+        <p th:case="'03'">Dữ liệu gửi sang không đúng định dạng.</p>
+        <p th:case="'04'">Khởi tạo GD không thành công do Website đang bị tạm khóa.</p>
+        <p th:case="'05'">Giao dịch không thành công do: Quý khách nhập sai mật khẩu quá số lần quy định. Xin quý khách vui lòng thực hiện lại giao dịch.</p>
+        <p th:case="'13'">Giao dịch không thành công do Quý khách nhập sai mật khẩu xác thực giao dịch (OTP). Xin quý khách vui lòng thực hiện lại giao dịch..</p>
+        <p th:case="'07'">Giao dịch bị nghi ngờ là giao dịch gian lận.</p>
+        <p th:case="'09'">Giao dịch không thành công do: Thẻ/Tài khoản của khách hàng chưa đăng ký dịch vụ InternetBanking tại ngân hàng.</p>
+        <p th:case="'10'">Giao dịch không thành công do: Khách hàng xác thực thông tin thẻ/tài khoản không đúng quá 3 lần.</p>
+        <p th:case="'11'">Giao dịch không thành công do: Đã hết hạn chờ thanh toán. Xin quý khách vui lòng thực hiện lại giao dịch.</p>
+        <p th:case="'12'">Giao dịch không thành công do: Thẻ/Tài khoản của khách hàng bị khóa.</p>
+        <p th:case="'51'">Giao dịch không thành công do: Tài khoản của quý khách không đủ số dư để thực hiện giao dịch.</p>
+        <p th:case="'65'">Giao dịch không thành công do: Tài khoản của Quý khách đã vượt quá hạn mức giao dịch trong ngày.</p>
+        <p th:case="'08'">Giao dịch không thành công do: Hệ thống Ngân hàng đang bảo trì. Xin quý khách tạm thời không thực hiện giao dịch bằng thẻ/tài khoản của Ngân hàng này.</p>
+        <p th:case="'24'">Giao dịch không thành công do: Khách hàng hủy giao dịch.</p>
+        <p th:case="'99'">Các lỗi khác.</p>
+    </div>
+
+    <table class="table table-striped table-hover table-hover">
+        <thead>
+        <tr>
+            <th>Name</th>
+            <th>Value</th>
+            <th>Description</th>
+        </tr>
+        </thead>
+
+        <tbody>
+        <tr>
+            <td>Merchant ID</td>
+            <td th:text="${vnp_TmnCode}"></td>
+            <td>Được cấp bởi VNPAY</td>
+        </tr>
+        <tr>
+            <td>Merchant Name</td>
+            <td>VNPAY Demo</td>
+            <td>Tên Website Merchant</td>
+        </tr>
+        <tr>
+            <td>Merchant Transaction Reference</td>
+            <td th:text="${vnp_TxnRef}"></td>
+            <td>Mã GD của website merchant</td>
+        </tr>
+        <tr>
+            <td>Transaction Info</td>
+            <td th:text="${vnp_OrderInfo}"></td>
+            <td>Thông tin mô tả từ website merchant</td>
+        </tr>
+        <tr>
+            <td>Amount</td>
+            <td th:text="${vnp_Amount}"></td>
+            <td>Số tiền được thanh toán</td>
+        </tr>
+        <tr>
+            <td>Current Code</td>
+            <td>VND</td>
+            <td>Đơn vị tiền tệ được thanh toán</td>
+        </tr>
+        <tr>
+            <td>Transaction Response Code</td>
+            <td th:text="${vnp_ResponseCode}"></td>
+            <td>Trạng thái GD</td>
+        </tr>
+        <tr th:switch="${vnp_ResponseCode}">
+            <td>Message</td>
+            <td th:case="'00'">Giao dịch thành công.</td>
+            <td th:case="'01'">Giao dịch đã tồn tại.</td>
+            <td th:case="'02'">Merchant không hợp lệ (kiểm tra lại vnp_TmnCode).</td>
+            <td th:case="'03'">Dữ liệu gửi sang không đúng định dạng.</td>
+            <td th:case="'04'">Khởi tạo GD không thành công do Website đang bị tạm khóa.</td>
+            <td th:case="'05'">Giao dịch không thành công do: Quý khách nhập sai mật khẩu quá số lần quy định. Xin quý khách vui lòng thực hiện lại giao dịch.</td>
+            <td th:case="'13'">Giao dịch không thành công do Quý khách nhập sai mật khẩu xác thực giao dịch (OTP). Xin quý khách vui lòng thực hiện lại giao dịch..</td>
+            <td th:case="'07'">Giao dịch bị nghi ngờ là giao dịch gian lận.</td>
+            <td th:case="'09'">Giao dịch không thành công do: Thẻ/Tài khoản của khách hàng chưa đăng ký dịch vụ InternetBanking tại ngân hàng.</td>
+            <td th:case="'10'">Giao dịch không thành công do: Khách hàng xác thực thông tin thẻ/tài khoản không đúng quá 3 lần.</td>
+            <td th:case="'11'">Giao dịch không thành công do: Đã hết hạn chờ thanh toán. Xin quý khách vui lòng thực hiện lại giao dịch.</td>
+            <td th:case="'12'">Giao dịch không thành công do: Thẻ/Tài khoản của khách hàng bị khóa.</td>
+            <td th:case="'51'">Giao dịch không thành công do: Tài khoản của quý khách không đủ số dư để thực hiện giao dịch.</td>
+            <td th:case="'65'">Giao dịch không thành công do: Tài khoản của Quý khách đã vượt quá hạn mức giao dịch trong ngày.</td>
+            <td th:case="'08'">Giao dịch không thành công do: Hệ thống Ngân hàng đang bảo trì. Xin quý khách tạm thời không thực hiện giao dịch bằng thẻ/tài khoản của Ngân hàng này.</td>
+            <td th:case="'24'">Giao dịch không thành công do: Khách hàng hủy giao dịch.</td>
+            <td th:case="'99'">Các lỗi khác.</td>
+            <td>Thông báo từ cổng thanh toán</td>
+        </tr>
+        <tr>
+            <td>Transaction Number</td>
+            <td th:text="${vnp_TransactionNo}"></td>
+            <td>Mã GD trên cổng thanh toán</td>
+        </tr>
+        <tr>
+            <td>Bank</td>
+            <td th:text="${vnp_BankCode}"></td>
+            <td>Ngân hàng GD</td>
+        </tr>
+        </tbody>
+    </table>
+
+    <p style="text-align: center">
+        <a value="Về danh sách" id="btnClose" class="btn btn-default" href="/home">Về danh sách</a>
+    </p>
+</div>
+</body>
+</html>

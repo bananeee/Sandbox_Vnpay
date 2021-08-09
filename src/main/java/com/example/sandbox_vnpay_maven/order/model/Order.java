@@ -117,8 +117,8 @@ public class Order {
         this.orderDate = orderDate;
     }
 
-    public String getOrderStatus() {
-        return orderStatus.name();
+    public Status getOrderStatus() {
+        return orderStatus;
     }
 
     public void setOrderStatus(Status orderStatus) {
