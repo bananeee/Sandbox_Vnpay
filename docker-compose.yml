@@ -5,7 +5,6 @@ services:
     environment:
       SPRING_DATASOURCE_URL: jdbc:postgresql://db:5432/vnpay_sandbox
       HOST_URL: http://localhost:8080/
-    restart: always
     ports:
       - 8080:8080
 #    networks:
